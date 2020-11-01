@@ -21,6 +21,6 @@ pub use traits::Coded;
 
 mod terminal_style;
 mod styled_terminal_text;
-pub mod enums;
-pub mod traits;
-pub mod utility;
+mod enums;
+mod traits;
+mod utility;
