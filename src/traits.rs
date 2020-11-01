@@ -1,4 +1,4 @@
 /// Describes anything that has a integer code
 pub trait Coded {
-    fn get_code(&self) -> u8;
+    fn code(&self) -> u8;
 }

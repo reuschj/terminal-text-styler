@@ -1,9 +1,18 @@
 use crate::terminal_style::TerminalStyle;
-use std::fmt::{Display, Error};
+use std::fmt::{Display, Error, Formatter};
 
 // Color Terminal Text --------------------------------------------------------------------------- /
 
 /// Holds and displays text that will print with the specified color in a terminal.
+///
+/// **Example:**
+/// ```
+/// use terminal_text_styler::{StyledTerminalText, TerminalStyle};
+///
+/// let greeting = StyledTerminalText::new("Hello, World!", TerminalStyle::bright_yellow());
+/// assert_eq!(greeting.output(), "\u{001B}[1;93mHello, World!\u{001B}[0m");
+/// ```
+#[derive(Debug)]
 pub struct StyledTerminalText {
     text: String,
     style: TerminalStyle,
@@ -71,19 +80,31 @@ impl StyledTerminalText {
 impl Display for StyledTerminalText {
 
     fn fmt(&self, formatter: &mut Formatter<'_>) -> Result<(), Error> {
-        write!(formatter, "{}", self.get_output())
+        write!(formatter, "{}", self.output())
     }
 }
+
+impl PartialEq for StyledTerminalText {
+
+    fn eq(&self, other: &Self) -> bool {
+        self.output == other.output
+    }
+}
+
+impl Eq for StyledTerminalText {}
 
 // Tests ----------------------------------------------------------------------------------------- /
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::terminal_style::TerminalStyle;
 
     #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
+    fn test_styled_terminal_text() {
+        let highlighted = StyledTerminalText::new("Hello, World!", TerminalStyle::bright_yellow());
+        assert_eq!(highlighted.output(), "\u{001B}[1;93mHello, World!\u{001B}[0m");
+        assert_eq!(format!("{}", highlighted), "\u{001B}[1;93mHello, World!\u{001B}[0m");
     }
 }
 

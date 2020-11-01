@@ -3,6 +3,7 @@ use std::fmt::{Display, Formatter, Error};
 
 /// ANSI Escape codes for text foreground color.
 /// [ANSI Escape Codes](https://en.wikipedia.org/wiki/ANSI_escape_code)
+#[derive(Debug)]
 pub enum ANSIForegroundColor {
     Black,
     Red,
@@ -26,7 +27,7 @@ pub enum ANSIForegroundColor {
 impl Coded for ANSIForegroundColor {
 
     /// ANSI escape code
-    fn get_code(&self) -> u8 {
+    fn code(&self) -> u8 {
         match self {
             ANSIForegroundColor::Black => 30,
             ANSIForegroundColor::Red => 31,
@@ -44,7 +45,7 @@ impl Coded for ANSIForegroundColor {
             ANSIForegroundColor::BrightMagenta => 95,
             ANSIForegroundColor::BrightCyan => 96,
             ANSIForegroundColor::BrightWhite => 97,
-            ANSIForegroundColor::ANSI256(custom) => custom,
+            ANSIForegroundColor::ANSI256(_) => 38,
         }
     }
 }
@@ -90,24 +91,24 @@ impl ANSIForegroundColor {
     }
 
     /// String representation
-    fn get_description(&self) -> &str {
+    fn description(&self) -> String {
         match self {
-            ANSIForegroundColor::Black => "Black",
-            ANSIForegroundColor::Red => "Red",
-            ANSIForegroundColor::Green => "Green",
-            ANSIForegroundColor::Yellow => "Yellow",
-            ANSIForegroundColor::Blue => "Blue",
-            ANSIForegroundColor::Magenta => "Magenta",
-            ANSIForegroundColor::Cyan => "Cyan",
-            ANSIForegroundColor::White => "White",
-            ANSIForegroundColor::BrightBlack => "Bright Black",
-            ANSIForegroundColor::BrightRed => "Bright Red",
-            ANSIForegroundColor::BrightGreen => "Bright Green",
-            ANSIForegroundColor::BrightYellow => "Bright Yellow",
-            ANSIForegroundColor::BrightBlue => "Bright Blue",
-            ANSIForegroundColor::BrightMagenta => "Bright Magenta",
-            ANSIForegroundColor::BrightCyan => "Bright Cyan",
-            ANSIForegroundColor::BrightWhite => "Bright White",
+            ANSIForegroundColor::Black => String::from("Black"),
+            ANSIForegroundColor::Red => String::from("Red"),
+            ANSIForegroundColor::Green => String::from("Green"),
+            ANSIForegroundColor::Yellow => String::from("Yellow"),
+            ANSIForegroundColor::Blue => String::from("Blue"),
+            ANSIForegroundColor::Magenta => String::from("Magenta"),
+            ANSIForegroundColor::Cyan => String::from("Cyan"),
+            ANSIForegroundColor::White => String::from("White"),
+            ANSIForegroundColor::BrightBlack => String::from("Bright Black"),
+            ANSIForegroundColor::BrightRed => String::from("Bright Red"),
+            ANSIForegroundColor::BrightGreen => String::from("Bright Green"),
+            ANSIForegroundColor::BrightYellow => String::from("Bright Yellow"),
+            ANSIForegroundColor::BrightBlue => String::from("Bright Blue"),
+            ANSIForegroundColor::BrightMagenta => String::from("Bright Magenta"),
+            ANSIForegroundColor::BrightCyan => String::from("Bright Cyan"),
+            ANSIForegroundColor::BrightWhite => String::from("Bright White"),
             ANSIForegroundColor::ANSI256(custom) => format!("ANSI 256-color ({})", custom),
         }
     }
@@ -125,7 +126,16 @@ impl Display for ANSIForegroundColor {
 
     /// String formatter
     fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error> {
-        let description = self.get_description();
+        let description = self.description();
         write!(f, "{}", description)
     }
 }
+
+impl PartialEq for ANSIForegroundColor {
+
+    fn eq(&self, other: &Self) -> bool {
+        self.code() == other.code()
+    }
+}
+
+impl Eq for ANSIForegroundColor {}
