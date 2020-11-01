@@ -1,11 +1,11 @@
 use crate::terminal_style::TerminalStyle;
 use std::fmt::{Display, Error, Formatter};
 
-// Color Terminal Text --------------------------------------------------------------------------- /
+// Styled Terminal Text --------------------------------------------------------------------------- /
 
 /// Holds and displays text that will print with the specified color in a terminal.
 ///
-/// **Example:**
+/// # Examples
 /// ```
 /// use terminal_text_styler::{StyledTerminalText, TerminalStyle};
 ///

@@ -2,13 +2,13 @@ use std::fmt::{Display, Formatter, Error};
 use crate::{SGREffect, ANSIForegroundColor, ANSIBackgroundColor};
 use crate::traits::Coded;
 
-// Terminal Color -------------------------------------------------------------------------------- /
+// Terminal Style -------------------------------------------------------------------------------- /
 
 /// Stores a custom style for terminal text.
 /// This creates the escape command needed to change terminal text color.
 /// [ANSI Escape Codes](https://en.wikipedia.org/wiki/ANSI_escape_code)
 ///
-/// **Example:**
+/// # Examples
 /// ```
 /// use terminal_text_styler::{TerminalStyle, SGREffect, ANSIForegroundColor};
 ///
