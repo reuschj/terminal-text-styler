@@ -3,6 +3,11 @@ name = "terminal-text-styler"
 version = "0.1.0"
 authors = ["reuschj <reuschj@gmail.com>"]
 edition = "2018"
+license = "GPL-2.0-or-later"
+description = "A crate for creating ANSI escape codes to produce styled text for terminal output."
+homepage = "https://github.com/reuschj/terminal-text-styler"
+repository = "https://github.com/reuschj/terminal-text-styler"
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
