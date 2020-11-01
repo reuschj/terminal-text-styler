@@ -1,4 +1,4 @@
-# TerminalTextStyler
+# Terminal Text Styler
 
 If you are building a command-line tool with Rust, you may find it useful to highlight output in a style to make it stand out. Doing so, simply means wrapping your text in the necessary [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
